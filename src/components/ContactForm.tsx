@@ -2,21 +2,21 @@
 
 import { useState } from "react";
 import { Send } from "lucide-react";
-import { contact } from "@/lib/content";
+import { whatsappLink } from "@/lib/content";
 
 const topics = ["Joining the community", "Events & workshops", "Collaborations & speaking", "Something else"];
 
-/* No backend yet — submitting opens the visitor's email app with everything pre-filled. */
+/* No backend yet — submitting opens a WhatsApp chat with us, with everything pre-filled. */
 export default function ContactForm() {
-  const [sent, setSent] = useState(false);
+  const [chatUrl, setChatUrl] = useState("");
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const f = new FormData(e.currentTarget);
-    const subject = `${f.get("topic")} — ${f.get("name")}`;
-    const body = `${f.get("message")}\n\n—\n${f.get("name")}\n${f.get("email")}${f.get("phone") ? `\n${f.get("phone")}` : ""}`;
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSent(true);
+    const text = `${f.get("topic")} — ${f.get("name")}\n\n${f.get("message")}\n\n—\n${f.get("name")}\n${f.get("email")}${f.get("phone") ? `\n${f.get("phone")}` : ""}`;
+    const url = whatsappLink(text);
+    window.open(url, "_blank", "noopener,noreferrer");
+    setChatUrl(url);
   }
 
   const field = "mt-2 w-full rounded-2xl border border-black/10 bg-cream/60 px-4 py-3 text-base text-ink outline-none transition focus:border-forest focus:bg-paper focus:ring-4 focus:ring-forest/15";
@@ -52,9 +52,9 @@ export default function ContactForm() {
           Send message <Send size={16} />
         </button>
         <p className="text-sm text-muted" aria-live="polite">
-          {sent
-            ? <>Your email app should open with your message ready. If it didn&apos;t, write to us at <a href={`mailto:${contact.email}`} className="text-forest underline">{contact.email}</a>.</>
-            : "This opens your email app with your message ready to send."}
+          {chatUrl
+            ? <>WhatsApp should open with your message ready. If it didn&apos;t, <a href={chatUrl} target="_blank" rel="noopener noreferrer" className="text-forest underline">tap here</a>.</>
+            : "This opens WhatsApp with your message ready to send."}
         </p>
       </div>
     </form>

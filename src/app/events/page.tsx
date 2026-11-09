@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BellRing, CalendarDays, Clock, MapPin, Sparkles, Backpack, Heart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { contact, events, eventDateParts, eventsLive, formatEventTime, siteUrl, type EventItem } from "@/lib/content";
+import { contact, events, eventDateParts, eventsLive, formatEventTime, siteUrl, whatsappLink, type EventItem } from "@/lib/content";
 
 export const metadata: Metadata = eventsLive ? {
   title:       "Upcoming Events — Comedy, Workshops, Talks & Community Circles",
@@ -28,7 +28,7 @@ export const metadata: Metadata = eventsLive ? {
   },
 };
 
-const notifyHref = `mailto:${contact.email}?subject=${encodeURIComponent("Notify me when Project Soulfulness events launch")}`;
+const notifyHref = whatsappLink("Hi Project Soulfulness! Please notify me when your events launch.");
 
 /* While events aren't live: a preview of the planned formats, with no dates, times or booking. */
 function PreviewCard({ ev, first }: { ev: EventItem; first: boolean }) {
@@ -60,11 +60,11 @@ function ComingSoon() {
         <h1 className="mt-3 font-serif font-semibold text-4xl lg:text-6xl text-ink">Something lovely is on the way</h1>
         <p className="mt-5 text-base lg:text-lg leading-relaxed text-muted">
           We&apos;re putting the finishing touches on our first gatherings — laughter-filled evenings, hands-on
-          workshops and conversations that matter. Leave us your email and you&apos;ll be the first to know when
+          workshops and conversations that matter. Message us on WhatsApp and you&apos;ll be the first to know when
           the calendar opens.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <a href={notifyHref} className="inline-flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-forest/25 transition hover:-translate-y-0.5 hover:brightness-95">
+          <a href={notifyHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-forest/25 transition hover:-translate-y-0.5 hover:brightness-95">
             <BellRing size={16} /> Notify me
           </a>
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-full border-2 border-forest px-6 py-3 text-sm font-semibold text-forest transition hover:bg-forest hover:text-white">
@@ -92,7 +92,7 @@ const IST = "+05:30";
 function EventCard({ ev, first }: { ev: EventItem; first: boolean }) {
   const d = eventDateParts(ev.date);
   const fullDate = `${d.day.charAt(0)}${d.day.slice(1).toLowerCase()}, ${Number(d.date)} ${MONTH_NAMES[Number(ev.date.slice(5, 7)) - 1]} ${d.year}`;
-  const reserve = `mailto:${contact.email}?subject=${encodeURIComponent(`Reserve a spot: ${ev.title} (${fullDate})`)}`;
+  const reserve = whatsappLink(`Hi Project Soulfulness! I'd like to reserve a spot for ${ev.title} on ${fullDate}.`);
 
   return (
     <article id={ev.slug} className="scroll-mt-32 grid overflow-hidden rounded-3xl border border-black/5 bg-paper shadow-lg target:ring-4 target:ring-forest/40 lg:grid-cols-[0.9fr_1.1fr]">
@@ -139,7 +139,7 @@ function EventCard({ ev, first }: { ev: EventItem; first: boolean }) {
         </p>
 
         <div className="mt-7 flex flex-wrap gap-3">
-          <a href={reserve} className="inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:brightness-95">
+          <a href={reserve} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:-translate-y-0.5 hover:brightness-95">
             Reserve a spot <ArrowRight size={16} />
           </a>
           <Link href="/contact" className="inline-flex items-center gap-2 rounded-full border-2 border-forest px-6 py-2.5 text-sm font-semibold text-forest transition hover:bg-forest hover:text-white">

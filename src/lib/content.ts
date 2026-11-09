@@ -191,7 +191,13 @@ const fullAddress = "Western Dallas Center, Dallas Centre Rd, Silpa Gram Craft V
 export const contact = {
   email:        "contact@projectsoulfulness.com",
   phone:        "+91 79938 37007",
+  whatsapp:     "917993837007", // country code + number, digits only — enquiries from the site go here
   address:      fullAddress,
   addressShort: "Madhapur, Hyderabad",
   mapsUrl:      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`,
 };
+
+/* Opens a WhatsApp chat with us, with the message already typed for the visitor to send. */
+export function whatsappLink(message: string) {
+  return `https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(message)}`;
+}
