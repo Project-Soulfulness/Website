@@ -6,7 +6,7 @@ import Logo from "@/components/Logo";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useReveal } from "@/lib/useReveal";
-import { contact, navLinks, navHref } from "@/lib/content";
+import { contact, navLinks, navHref, whatsappLink } from "@/lib/content";
 
 export default function Footer() {
   const ref = useReveal<HTMLElement>();
@@ -37,7 +37,9 @@ export default function Footer() {
 
           <div className="reveal-right flex justify-center lg:justify-end">
             <a
-              href={`mailto:${contact.email}?subject=I'd%20like%20to%20join%20Project%20Soulfulness`}
+              href={whatsappLink("Hi Project Soulfulness! I'd like to join the community.")}
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-forest/25 transition hover:-translate-y-0.5 hover:shadow-xl"
             >
               Join the Community <ArrowRight size={16} />

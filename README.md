@@ -42,7 +42,7 @@ Project Soulfulness is a non-clinical social-wellness space — part coffee shop
 - **Home page sections** — About, Experiences, Who We Serve, Positioning, Events and the latest blog posts.
 - **Blog ("The Soulful Journal")** — statically generated articles, each with its own SEO metadata.
 - **Events with a launch switch** — show a "Coming soon" preview or the full calendar by changing one setting.
-- **Contact page** — contact details, a Google Maps link and a message form that opens the visitor's email client (no backend required).
+- **Contact page** — contact details, a Google Maps link and a message form that sends enquiries to WhatsApp (no backend required).
 - **Brand touches** — an intro splash animation, flying butterflies, drifting leaves and a butterfly cursor.
 - **Responsive and accessible** — mobile-first layouts, keyboard-friendly controls, image alt text, and reduced-motion support for all animations.
 - **Content-driven** — nearly all copy, images and data live in two TypeScript files.
