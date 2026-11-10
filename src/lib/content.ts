@@ -15,7 +15,7 @@ export function navHref(href: string, onHome: boolean) {
 }
 
 /* Public site URL — used for canonical links, the sitemap and social previews. Update if the domain differs. */
-export const siteUrl = "https://projectsoulfulness.com";
+export const siteUrl = "https://www.projectsoulfulness.com"; // must match the live domain exactly (the bare domain redirects to www)
 
 /* Photo stack under the hero intro — swap in real photos from the café. */
 export const heroGallery = [
