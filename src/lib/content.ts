@@ -80,6 +80,12 @@ export const audiencePoints = [
   "Loneliness and companionship struggles",
 ];
 
+/* Launch milestones, shown in the "Save the Dates" section on the home page and on /events. */
+export const launchDates = [
+  { label: "Pre-launch",   date: "2026-11-21", note: "A first look at the space — come early, meet the team and the pups." },
+  { label: "Grand Launch", date: "2026-12-05", note: "Doors fully open: music, coffee, comedy and good people all day." },
+];
+
 /* Events aren't running yet: while this is false the home page and /events show a "Coming soon"
    preview of the kinds of events planned (no dates, times or booking). Set to true once the
    real calendar below is ready. */
@@ -190,8 +196,8 @@ const fullAddress = "Western Dallas Center, Dallas Centre Rd, Silpa Gram Craft V
 
 export const contact = {
   email:        "contact@projectsoulfulness.com",
-  phone:        "+91 79938 37007",
-  whatsapp:     "917993837007", // country code + number, digits only — enquiries from the site go here
+  phone:        "+91 76720 97007",
+  whatsapp:     "917672097007", // country code + number, digits only — enquiries from the site go here
   address:      fullAddress,
   addressShort: "Madhapur, Hyderabad",
   mapsUrl:      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`,

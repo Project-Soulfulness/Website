@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Navbar       from "@/components/Navbar";
 import HeroSection  from "@/components/HeroSection";
+import LaunchDates  from "@/components/LaunchDates";
 import AboutSection from "@/components/AboutSection";
 import Experiences  from "@/components/Experiences";
 import WhoWeServe   from "@/components/WhoWeServe";
@@ -61,6 +62,7 @@ export default function Home() {
       <Navbar />
       <main>
         <HeroSection />
+        <LaunchDates />
         <AboutSection />
         <Experiences />
         <WhoWeServe />

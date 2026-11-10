@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowRight, BellRing, CalendarDays, Clock, MapPin, Sparkles, Backpack, Heart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { contact, events, eventDateParts, eventsLive, formatEventTime, siteUrl, whatsappLink, type EventItem } from "@/lib/content";
+import { contact, events, eventDateParts, eventsLive, formatEventTime, launchDates, siteUrl, whatsappLink, type EventItem } from "@/lib/content";
 
 export const metadata: Metadata = eventsLive ? {
   title:       "Upcoming Events — Comedy, Workshops, Talks & Community Circles",
@@ -63,6 +63,17 @@ function ComingSoon() {
           workshops and conversations that matter. Message us on WhatsApp and you&apos;ll be the first to know when
           the calendar opens.
         </p>
+        <ul className="mt-7 flex flex-wrap gap-3">
+          {launchDates.map((l, i) => {
+            const d = eventDateParts(l.date);
+            return (
+              <li key={l.label} className="inline-flex items-center gap-3 rounded-2xl border border-black/5 bg-paper px-4 py-2.5 shadow-md">
+                <CalendarDays size={18} className={i ? "text-magenta" : "text-forest"} />
+                <span className="text-sm"><span className="font-semibold text-ink">{l.label}</span> <span className="text-muted">· {Number(d.date)} {MONTH_NAMES[Number(l.date.slice(5, 7)) - 1]} {d.year}</span></span>
+              </li>
+            );
+          })}
+        </ul>
         <div className="mt-8 flex flex-wrap gap-3">
           <a href={notifyHref} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-forest px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-forest/25 transition hover:-translate-y-0.5 hover:brightness-95">
             <BellRing size={16} /> Notify me
