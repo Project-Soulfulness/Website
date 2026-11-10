@@ -35,10 +35,29 @@ const localBusiness = {
   servesCuisine: ["Coffee", "Healthy food"],
 };
 
+/* Gives Google the site's name and logo for search results. */
+const website = {
+  "@context":    "https://schema.org",
+  "@type":       "WebSite",
+  name:          "Project Soulfulness",
+  alternateName: ["Project Soulfulness Hyderabad", "projectsoulfulness.com"],
+  url:           `${siteUrl}/`,
+};
+const organization = {
+  "@context": "https://schema.org",
+  "@type":    "Organization",
+  name:       "Project Soulfulness",
+  url:        `${siteUrl}/`,
+  logo:       `${siteUrl}/images/logo.png`,
+  email:      contact.email,
+};
+
 export default function Home() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness).replace(/</g, "\\u003c") }} />
+      {[website, organization, localBusiness].map((data) => (
+        <script key={data["@type"]} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(data).replace(/</g, "\\u003c") }} />
+      ))}
       <Navbar />
       <main>
         <HeroSection />
