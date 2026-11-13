@@ -4,7 +4,7 @@ export const navLinks = [
   { label: "Home",        href: "#home" },
   { label: "About",       href: "#about" },
   { label: "Experiences", href: "#experiences" },
-  { label: "Events",      href: "#events" },
+  { label: "Events",      href: "/events" },
   { label: "Blogs",       href: "/blog" },
   { label: "Contact",     href: "/contact" },
 ];
@@ -226,6 +226,8 @@ export const contact = {
   whatsapp:     "918050766965", // country code + number, digits only — enquiries from the site go here
   address:      fullAddress,
   addressShort: "Madhapur, Hyderabad",
+  instagram:    "https://www.instagram.com/projectsoulfulnesss/",
+  instagramHandle: "Projectsoulfulness", // label shown in the footer
   mapsUrl:      `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`,
 };
 
