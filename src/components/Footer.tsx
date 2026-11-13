@@ -54,6 +54,12 @@ export default function Footer() {
           <li className="flex items-center gap-2 whitespace-nowrap"><Mail size={16} className="text-forest" /><a href={`mailto:${contact.email}`} className="transition-colors hover:text-forest">{contact.email}</a></li>
           <li className="flex items-center gap-2 whitespace-nowrap"><Phone size={16} className="text-forest" /><a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="transition-colors hover:text-forest">{contact.phone}</a></li>
           <li className="flex items-center gap-2 whitespace-nowrap"><MapPin size={16} className="text-forest" /><a href={contact.mapsUrl} target="_blank" rel="noopener noreferrer" title={contact.address} className="transition-colors hover:text-forest">{contact.addressShort}</a></li>
+          <li className="flex items-center gap-2 whitespace-nowrap">
+            <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" className="text-forest" aria-hidden="true">
+              <rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" />
+            </svg>
+            <a href={contact.instagram} target="_blank" rel="noopener noreferrer" aria-label={`Instagram ${contact.instagramHandle}`} className="transition-colors hover:text-forest">{contact.instagramHandle}</a>
+          </li>
         </ul>
         <nav aria-label="Footer">
           <ul className="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-white/70">

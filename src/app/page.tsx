@@ -51,6 +51,7 @@ const organization = {
   url:        `${siteUrl}/`,
   logo:       `${siteUrl}/images/logo.png`,
   email:      contact.email,
+  sameAs:     [contact.instagram],
 };
 
 export default function Home() {
