@@ -18,7 +18,7 @@ export default function Events() {
             <h2 className="mt-3 font-serif font-semibold text-3xl lg:text-5xl text-ink">Join, Learn, Connect</h2>
             <p className="mt-3 text-base text-muted">
               {eventsLive
-                ? <>From mindful mornings to engaging evenings — there&apos;s always something happening.</>
+                ? <>Our pre-launch weekend, 21–22 November: painting, games, comedy, music, Frenchies and morning yoga.</>
                 : <>Our first gatherings are on the way. Here&apos;s a taste of what we&apos;re planning.</>}
             </p>
           </div>
