@@ -28,7 +28,6 @@ The official website of Project Soulfulness — a garden café and social-wellne
 - [Project structure](#project-structure)
 - [Managing content](#managing-content)
 - [SEO](#seo)
-- [Brochure pages](#brochure-pages)
 - [Deployment](#deployment)
 - [Roadmap](#roadmap)
 - [License](#license)
@@ -97,7 +96,6 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ```
 Website/
-├── brochure/                   Standalone printable brochure and teaser pages
 ├── public/
 │   └── images/                 Photos and logo
 ├── src/
@@ -185,10 +183,6 @@ Edit `launchDates` in `src/lib/content.ts` to change the dates, notes or the pre
 - Location-focused keywords for local search in Hyderabad
 
 `siteUrl` in `src/lib/content.ts` must stay `https://www.projectsoulfulness.com` (the bare domain redirects to `www`), so canonical URLs and the sitemap match the live site.
-
-## Brochure pages
-
-The `brochure/` folder holds standalone HTML pages (brochures and "coming soon" teasers) for printing or sharing. They are not part of the Next.js site — open them directly in a browser. Update the phone number in these files by hand if it changes.
 
 ## Deployment
 
