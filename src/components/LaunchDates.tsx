@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { CalendarHeart, MessageCircle } from "lucide-react";
+import { CalendarHeart, MapPin, MessageCircle, Navigation } from "lucide-react";
 import { useReveal } from "@/lib/useReveal";
 import { eventDateParts, launchDates, whatsappLink } from "@/lib/content";
 
@@ -90,6 +90,35 @@ export default function LaunchDates() {
               })}
             </ul>
           </div>
+
+          {launchDates.filter((l) => l.venue).map((l) => (
+            <div key={l.label} className="relative mt-10 overflow-hidden rounded-3xl bg-white/[0.07] ring-1 ring-white/15">
+              <iframe
+                src={l.venue!.embedUrl}
+                title={`Map: ${l.label} venue, ${l.venue!.name}`}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                className="block h-64 w-full border-0 sm:h-80"
+              />
+              <div className="flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+                <div className="flex items-start gap-3">
+                  <MapPin size={22} className="mt-0.5 shrink-0 text-forest" />
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[#7BE3B0]">{l.label} venue</p>
+                    <p className="mt-1 font-serif text-xl font-semibold">{l.venue!.name}</p>
+                  </div>
+                </div>
+                <a
+                  href={l.venue!.mapsUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-forest px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-forest/25 transition hover:-translate-y-0.5 hover:brightness-95"
+                >
+                  <Navigation size={16} /> Get directions
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>

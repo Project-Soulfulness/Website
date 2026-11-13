@@ -4,15 +4,15 @@ import Link from "next/link";
 import { ArrowRight, BellRing, CalendarDays, Clock, MapPin, Sparkles, Backpack, Heart } from "lucide-react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { contact, events, eventDateParts, eventsLive, formatEventTime, launchDates, siteUrl, whatsappLink, type EventItem } from "@/lib/content";
+import { contact, events, eventDateParts, eventsLive, eventTimeLabel, launchDates, siteUrl, whatsappLink, type EventItem } from "@/lib/content";
 
 export const metadata: Metadata = eventsLive ? {
-  title:       "Upcoming Events — Comedy, Workshops, Talks & Community Circles",
-  description: "See every upcoming Project Soulfulness event: stand-up comedy nights, discussion circles, workshops, inspirational talks, mindful brunches and more.",
+  title:       "Pre-launch Events — Painting, Games, Comedy, Jamming & Yoga",
+  description: "Project Soulfulness pre-launch weekend, 21–22 November 2026: painting, fun games, an inspirational talk, stand-up comedy, Frenchie time, a jamming session and morning yoga.",
   alternates:  { canonical: "/events" },
   openGraph: {
-    title:       "Upcoming Events at Project Soulfulness",
-    description: "Comedy nights, workshops, talks and community circles.",
+    title:       "Project Soulfulness Pre-launch Events · 21–22 Nov",
+    description: "Painting, fun games, an inspirational talk, stand-up comedy, Frenchie time, jamming and morning yoga.",
     type:        "website",
     url:         "/events",
   },
@@ -69,7 +69,13 @@ function ComingSoon() {
             return (
               <li key={l.label} className="inline-flex items-center gap-3 rounded-2xl border border-black/5 bg-paper px-4 py-2.5 shadow-md">
                 <CalendarDays size={18} className={i ? "text-magenta" : "text-forest"} />
-                <span className="text-sm"><span className="font-semibold text-ink">{l.label}</span> <span className="text-muted">· {Number(d.date)} {MONTH_NAMES[Number(l.date.slice(5, 7)) - 1]} {d.year}</span></span>
+                <span className="text-sm"><span className="font-semibold text-ink">{l.label}</span> <span className="text-muted">· {Number(d.date)} {MONTH_NAMES[Number(l.date.slice(5, 7)) - 1]} {d.year}</span>
+                  {l.venue && (
+                    <> <span className="text-muted">·</span>{" "}
+                      <a href={l.venue.mapsUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-forest underline-offset-2 hover:underline">{l.venue.name}</a>
+                    </>
+                  )}
+                </span>
               </li>
             );
           })}
@@ -123,8 +129,13 @@ function EventCard({ ev, first }: { ev: EventItem; first: boolean }) {
 
         <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink/80">
           <li className="flex items-center gap-2"><CalendarDays size={16} className="text-forest" />{fullDate}</li>
-          <li className="flex items-center gap-2"><Clock size={16} className="text-forest" />{formatEventTime(ev.start)} – {formatEventTime(ev.end)}</li>
-          <li className="flex items-center gap-2"><MapPin size={16} className="flex-shrink-0 text-forest" />{contact.address}</li>
+          <li className="flex items-center gap-2"><Clock size={16} className="text-forest" />{eventTimeLabel(ev)}</li>
+          <li className="flex items-center gap-2">
+            <MapPin size={16} className="flex-shrink-0 text-forest" />
+            {ev.venue
+              ? <a href={ev.venue.mapsUrl} target="_blank" rel="noopener noreferrer" className="font-medium text-forest underline-offset-2 hover:underline">{ev.venue.name}</a>
+              : contact.address}
+          </li>
         </ul>
 
         <p className="mt-5 leading-relaxed text-muted">{ev.about}</p>
@@ -191,13 +202,15 @@ export default function EventsPage() {
       "@type":               "Event",
       name:                  ev.title,
       description:           ev.about,
-      startDate:             `${ev.date}T${ev.start}:00${IST}`,
-      endDate:               `${ev.date}T${ev.end}:00${IST}`,
+      startDate:             ev.start ? `${ev.date}T${ev.start}:00${IST}` : ev.date,
+      ...(ev.end && { endDate: `${ev.date}T${ev.end}:00${IST}` }),
       eventStatus:           "https://schema.org/EventScheduled",
       eventAttendanceMode:   "https://schema.org/OfflineEventAttendanceMode",
       image:                 `${siteUrl}${ev.image}`,
       url:                   `${siteUrl}/events#${ev.slug}`,
-      location:              { "@type": "Place", name: "Project Soulfulness", address: contact.address },
+      location:              ev.venue
+        ? { "@type": "Place", name: ev.venue.name, address: { "@type": "PostalAddress", addressLocality: "Mysuru", addressRegion: "Karnataka", addressCountry: "IN" } }
+        : { "@type": "Place", name: "Project Soulfulness", address: contact.address },
       organizer:             { "@type": "Organization", name: "Project Soulfulness", url: siteUrl },
     })),
   };
@@ -212,8 +225,8 @@ export default function EventsPage() {
             <span className="eyebrow">Upcoming Events</span>
             <h1 className="mt-3 font-serif font-semibold text-4xl lg:text-6xl text-ink">Join, learn, connect</h1>
             <p className="mt-5 text-base lg:text-lg leading-relaxed text-muted">
-              Laughter-filled evenings, hands-on workshops and conversations that matter. Everyone is welcome —
-              come solo, bring a friend, and leave with a few more.
+              Our pre-launch weekend on 21–22 November is packed with painting, games, laughter, music and
+              yoga. Everyone is welcome — come solo, bring a friend, and leave with a few more.
             </p>
           </header>
 

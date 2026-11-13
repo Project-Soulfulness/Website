@@ -80,24 +80,36 @@ export const audiencePoints = [
   "Loneliness and companionship struggles",
 ];
 
+/* Where the pre-launch weekend happens (21–22 Nov). */
+const prelaunchVenue = { name: "White Teak Coffee Roasters, Mysuru", mapsUrl: "https://maps.app.goo.gl/sMiPguLHTQFoZUzA6" };
+
 /* Launch milestones, shown in the "Save the Dates" section on the home page and on /events. */
-export const launchDates = [
-  { label: "Pre-launch",   date: "2026-11-21", note: "A first look at the space — come early, meet the team and the pups." },
+export const launchDates: { label: string; date: string; note: string; venue?: { name: string; mapsUrl: string; embedUrl: string } }[] = [
+  {
+    label: "Pre-launch", date: "2026-11-21",
+    note: "A first look at Project Soulfulness — come early, meet the team and the pups.",
+    venue: {
+      ...prelaunchVenue,
+      embedUrl: "https://maps.google.com/maps?q=White+Teak+Coffee+Roasters,+Mysuru&ll=12.3282387,76.6285332&z=16&output=embed",
+    },
+  },
   { label: "Grand Launch", date: "2026-12-05", note: "Doors fully open: music, coffee, comedy and good people all day." },
 ];
 
-/* Events aren't running yet: while this is false the home page and /events show a "Coming soon"
-   preview of the kinds of events planned (no dates, times or booking). Set to true once the
-   real calendar below is ready. */
-export const eventsLive = false;
+/* While this is false the home page and /events show a "Coming soon" preview of the kinds of
+   events planned (no dates, times or booking). True shows the real calendar below. */
+export const eventsLive = true;
 
-/* Placeholder schedule — replace dates, times and details with the real calendar.
-   Keep them in date order: the home page shows the first four, /events shows them all. */
+/* The event calendar. Keep it in date order: the home page shows the first four, /events shows them all.
+   `start`/`end` are optional 24h "HH:MM" times; without them the card shows `timeNote`
+   (or "Timing to be announced"). `venue` is optional; without it the café address is shown. */
 export type EventItem = {
   slug:       string;
   date:       string; // ISO yyyy-mm-dd
-  start:      string; // 24h "HH:MM"
-  end:        string;
+  start?:     string;
+  end?:       string;
+  timeNote?:  string;
+  venue?:     { name: string; mapsUrl: string };
   title:      string;
   tagline:    string;
   category:   string;
@@ -110,60 +122,74 @@ export type EventItem = {
 
 export const events: EventItem[] = [
   {
-    slug: "stand-up-comedy-evening", date: "2026-10-17", start: "19:30", end: "21:30",
-    title: "Stand-up Comedy Evening", tagline: "Laughter for a lighter you.", category: "Comedy",
+    slug: "prelaunch-painting", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Painting Session", tagline: "Brush off the stress.", category: "Art",
+    image: "/images/gallery-painting.jpeg",
+    about: "Kick off our pre-launch with a relaxed painting session. No skills needed — just pick up a brush, play with colour and see what comes out. All materials are provided.",
+    highlights: ["All paints, brushes and canvases provided", "Gentle guidance for first-timers", "Take your artwork home"],
+    bring: ["Clothes you don't mind getting a little colourful"],
+    goodFor: "Anyone who wants to slow down and create something",
+  },
+  {
+    slug: "prelaunch-fun-games", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Fun Games", tagline: "Games & giggles.", category: "Games",
+    image: "/images/gallery-games.jpeg",
+    about: "Easy, laugh-out-loud group games designed to break the ice. Come solo or bring your friends — you'll be on a team with new people in no time.",
+    highlights: ["Ice-breakers and team games", "Small prizes for the winners", "Perfect for meeting new people"],
+    bring: ["Your competitive side"],
+    goodFor: "Anyone who wants to make new friends quickly",
+  },
+  {
+    slug: "prelaunch-inspirational-talk", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Inspirational Talk", tagline: "Perspective from people who've been there.", category: "Talk",
+    image: "/images/exp-talks.jpg",
+    about: "An honest, uplifting talk on stress, setbacks and building a more balanced life — followed by an open Q&A and time to mingle.",
+    highlights: ["Talk from a guest speaker", "Open audience Q&A", "Time to connect afterwards"],
+    bring: ["Your questions"],
+    goodFor: "Young professionals and students navigating pressure",
+  },
+  {
+    slug: "prelaunch-standup-comedy", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Stand-up Comedy", tagline: "Laughter for a lighter you.", category: "Comedy",
     image: "/images/event-comedy.jpg",
-    about: "An easy-going night of local stand-up in a warm, intimate room. Clean, relatable comedy about city life, work and relationships — the kind of evening where strangers leave as friends.",
-    highlights: ["Sets from local and up-and-coming comedians", "Open-mic slot for brave first-timers", "Café menu and mocktails all evening"],
+    about: "Clean, relatable stand-up about city life, work and relationships — the kind of set where strangers end up laughing together like old friends.",
+    highlights: ["Sets from local comedians", "Warm, intimate setting", "Coffee and bites all evening"],
     bring: ["A friend — or come solo and make one"],
-    goodFor: "Anyone who needs a good laugh after a long week",
+    goodFor: "Anyone who needs a good laugh",
   },
   {
-    slug: "group-discussion-circle", date: "2026-10-25", start: "17:00", end: "18:30",
-    title: "Group Discussion Circle", tagline: "Real people, real conversations.", category: "Connection",
-    image: "/images/event-circle.jpg",
-    about: "A small, facilitated circle where you can talk, listen and be heard without judgement. This month's theme is 'Starting over in a new city' — share as much or as little as you like.",
-    highlights: ["Small group, gently facilitated", "A safe, confidential, judgement-free space", "Chai and snacks to keep things cosy"],
-    bring: ["An open mind — no preparation needed"],
-    goodFor: "Anyone feeling lonely, stuck or simply wanting deeper conversation",
-  },
-  {
-    slug: "weekend-workshop-self-discovery", date: "2026-10-31", start: "11:00", end: "14:00",
-    title: "Weekend Workshop: Self-Discovery", tagline: "Learn, create, and grow.", category: "Workshop",
-    image: "/images/event-workshop.jpg",
-    about: "A hands-on, reflective workshop combining journaling prompts, creative exercises and small-group sharing to help you understand what you value and where you want to go next.",
-    highlights: ["Guided journaling and reflection exercises", "Creative activity to map your goals", "Healthy lunch from our curated menu"],
-    bring: ["A notebook and pen (or use ours)"],
-    goodFor: "Anyone at a crossroads, or curious to know themselves better",
-  },
-  {
-    slug: "pups-and-coffee-morning", date: "2026-11-08", start: "10:00", end: "12:00",
-    title: "Pups & Coffee Morning", tagline: "Snuggles, sips and smiles.", category: "Companionship",
+    slug: "prelaunch-frenchie-time", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Frenchie Time", tagline: "Snuggles, sips and smiles.", category: "Companionship",
     image: "/images/exp-bulldog.jpg",
-    about: "Spend a slow Sunday morning with our resident French bulldogs. Enjoy a coffee, meet the pups, and learn about responsible pet adoption and companionship from our team.",
-    highlights: ["Time with our friendly French bulldogs", "Speciality coffee and fresh bakes", "A short talk on responsible adoption"],
+    about: "Meet our French bulldogs! Spend time with the pups, grab a coffee and learn about responsible pet companionship from our team.",
+    highlights: ["Time with our friendly French bulldogs", "Photos with the pups", "A short chat on responsible adoption"],
     bring: ["Nothing but yourself (and maybe a camera)"],
     goodFor: "Animal lovers, and anyone who could use some unconditional affection",
   },
   {
-    slug: "inspirational-talk-evening", date: "2026-11-21", start: "18:30", end: "20:00",
-    title: "Inspirational Talk: Finding Your Balance", tagline: "Perspective from people who've been there.", category: "Talk",
-    image: "/images/exp-talks.jpg",
-    about: "An honest evening talk from an accomplished guest speaker on burnout, setbacks and building a more balanced life — followed by an open Q&A and time to mingle.",
-    highlights: ["Talk from a guest speaker (to be announced)", "Open audience Q&A", "Networking over light bites"],
-    bring: ["Your questions"],
-    goodFor: "Young professionals navigating career pressure",
+    slug: "prelaunch-jamming-session", date: "2026-11-21", venue: prelaunchVenue,
+    title: "Jamming Session", tagline: "Bring a song, find your people.", category: "Music",
+    image: "/images/gallery-music.jpeg",
+    about: "Close the day with an open jam. Bring a song, pick up a guitar, or just sing along — every voice is welcome.",
+    highlights: ["Open jam, all levels welcome", "Guitar and percussion available", "Sing-alongs to end the night"],
+    bring: ["Your instrument, if you play one"],
+    goodFor: "Music lovers, singers and shower singers alike",
   },
   {
-    slug: "mindful-brunch", date: "2026-11-29", start: "11:00", end: "13:00",
-    title: "Mindful Brunch Club", tagline: "Nourish the body, feed the soul.", category: "Food",
-    image: "/images/exp-menu.jpg",
-    about: "A shared-table brunch built around our curated healthy menu. We'll start with a short mindful-eating exercise, then simply enjoy good food and good company.",
-    highlights: ["Seasonal, wholesome brunch menu", "Short guided mindful-eating practice", "Shared tables made for meeting new people"],
-    bring: ["An appetite — let us know about any dietary needs when you reserve"],
-    goodFor: "Foodies, newcomers to the city, and anyone who'd like a slower Sunday",
+    slug: "prelaunch-morning-yoga", date: "2026-11-22", timeNote: "Morning", venue: prelaunchVenue,
+    title: "Morning Yoga", tagline: "Breathe in, slow down.", category: "Wellness",
+    image: "/images/event-yoga.jpg",
+    about: "Start your Sunday with a calm, guided yoga session suited to all levels — gentle stretches, breathing and a few quiet minutes to reset.",
+    highlights: ["Guided session for all levels", "Breathing and relaxation practice", "Coffee and a healthy bite after"],
+    bring: ["A yoga mat (or let us know and we'll arrange one)", "Comfortable clothes and a water bottle"],
+    goodFor: "Anyone wanting a peaceful, energising start to the day",
   },
 ];
+
+/* "7:00 PM – 9:00 PM", or the event's time note when no exact times are set. */
+export function eventTimeLabel(ev: EventItem) {
+  return ev.start ? `${formatEventTime(ev.start)}${ev.end ? ` – ${formatEventTime(ev.end)}` : ""}` : ev.timeNote ?? "Timing to be announced";
+}
 
 const DAYS   = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
 const MONTHS = ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"];
